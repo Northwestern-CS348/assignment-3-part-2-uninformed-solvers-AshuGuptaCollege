@@ -49,13 +49,13 @@ class SolverDFS(UninformedSolver):
                 if child in self.visited:
                     continue
                 else:
-                    unvisited_child_found = True
                     self.currentState.children.append(child)
                     child.parent = self.currentState
                     # mark the node as not visited
                     self.visited[child] = True
                     self.gm.makeMove(move)
                     self.currentState = child
+                    unvisited_child_found = True
                     break
             if unvisited_child_found is False:
                 self.gm.reverseMove(currMove)
@@ -87,6 +87,7 @@ class SolverBFS(UninformedSolver):
         """
         ### Student code goes here
         if self.gm.getGameState() == self.victoryCondition:
+            self.my_queue.clear()
             return True
 
         currNode = self.currentState
